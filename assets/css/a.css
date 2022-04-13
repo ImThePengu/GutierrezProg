@@ -1,0 +1,5 @@
+.perfil{border-radius: 50%; width: 300px; height: 200px;text-align: left}
+body{font-family: 'Courier New', Courier, monospace; text-align: center; background-color: rgb(19, 21, 29); color: azure;}
+H1 {background-color: antiquewhite; font-family:Verdana, Geneva, Tahoma, sans-serif;color : rgb(113, 48, 167); text-align : center}
+.prueba{background-color: antiquewhite; color: brown; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
+#ident{font-size: 13px;background-color: blanchedalmond; color: crimson;}
