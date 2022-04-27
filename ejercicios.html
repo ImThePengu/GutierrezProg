@@ -1,0 +1,95 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP Javascript</title>
+</head>
+<body>
+    <h4>Ejercicio 1:</h4>
+
+    <label for="ej1_n1">Número 1:</label>
+    <input type="number" id="ej1_n1">
+
+    <label for="ej1_n2">Número 2:</label>
+    <input type="number" id="ej1_n2">
+
+    <label for="ej1_n3">Número 3:</label>
+    <input type="number" id="ej1_n3">
+    <button onclick="func_ej1()">Comparar</button>
+    <label for="ej1_mayor">El mayor es:</label>
+    <input type="number" id="ej1_mayor">
+    <label for="ej1_menor">El menor es:</label>
+    <input type="number" id="ej1_menor">
+
+    <script>
+        function func_ej1(){
+            let ej1_c1 = parseFloat(document.getElementById('ej1_n1').value);
+            let ej1_c2 = parseFloat(document.getElementById('ej1_n2').value);
+            let ej1_c3 = parseFloat(document.getElementById('ej1_n3').value);
+            if(ej1_c1>ej1_c2 && ej1_c1>ej1_c3){
+                document.getElementById("ej1_mayor").value = ej1_c1;
+            } else if(ej1_c2>ej1_c3 && ej1_c2>ej1_c1){
+                document.getElementById("ej1_mayor").value = ej1_c2;
+            } else {
+                document.getElementById("ej1_mayor").value = ej1_c3;
+        }
+        if(ej1_c1<ej1_c2 && ej1_c1<ej1_c3){
+                document.getElementById("ej1_menor").value = ej1_c1;
+            } else if(ej1_c2<ej1_c3 && ej1_c2<ej1_c1){
+                document.getElementById("ej1_menor").value = ej1_c2;
+            } else {
+                document.getElementById("ej1_menor").value = ej1_c3;
+        }
+    }
+    </script>
+    <br>
+    <h4>Ejercicio 2:</h4>
+
+    <label for="ej2_n1">Número 1:</label>
+    <input type="number" id="ej2_n1">
+
+    <label for="ej2_n2">Número 2:</label>
+    <input type="number" id="ej2_n2">
+
+    <button onclick="func_ej2()">Sumar</button>
+    <label for="ej2_resultado">El resultado:</label>
+    <input type="number" id="ej2_resultado">
+
+    <script>
+        function func_ej2(){
+            let ej2_n1 = parseFloat(document.getElementById('ej2_n1').value);
+            let ej2_n2 = parseFloat(document.getElementById('ej2_n2').value);
+            const ej2_suma= ej2_n1 + ej2_n2;
+                document.getElementById("ej2_resultado").value = ej2_suma;
+        }
+    </script>
+    <br>
+    <h4>Ejercicio 3:</h4>
+
+    <label for="ej3_pal">Ingrese una palabra:</label>
+    <input type="tex" id="ej3_pal">
+
+    <label for="ej3_n1">Número 1:</label>
+    <input type="number" id="ej3_n1">
+
+    <button onclick="func_ej3()">Repetir</button>
+    <br>
+    <label for="ej3_resultado">El resultado:</label>
+    <input type="text" id="ej3_resultado" size="100">
+
+    <script>
+        function func_ej3(){
+            let ej3_pal = document.getElementById('ej3_pal').value;
+            let ej3_n1 = parseFloat(document.getElementById('ej3_n1').value);
+            var ej3_ac ='';
+            for (let ej3_for = 0; ej3_for < ej3_n1; ej3_for++) {
+                 ej3_ac+= " "+ej3_pal;
+            }
+            document.getElementById("ej3_resultado").value = ej3_ac;
+        }
+    </script>
+    <br>
+    <button onclick="window.location.href='index.html'"><h3>Ir a la página principal</h3></button>
+</body>
+</html>
