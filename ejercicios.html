@@ -68,9 +68,9 @@
     <h4>Ejercicio 3:</h4>
 
     <label for="ej3_pal">Ingrese una palabra:</label>
-    <input type="tex" id="ej3_pal">
+    <input type="text" id="ej3_pal">
 
-    <label for="ej3_n1">Número 1:</label>
+    <label for="ej3_n1">Número de repeticiones:</label>
     <input type="number" id="ej3_n1">
 
     <button onclick="func_ej3()">Repetir</button>
@@ -90,6 +90,45 @@
         }
     </script>
     <br>
+    <br>
+    <h4>Ejercicio 4:</h4>
+
+    <label for="ej4_cel">Ingrese una temperatura en Celcius</label>
+    <input type="number" id="ej4_cel">
+
+    <button onclick="func_celfar()">Convertir a Fahrenheit</button>
+
+    <label for="ej4_res_1">Farenheit</label>
+    <input type="number" id="ej4_res_1">
+
+    <script>
+        function func_celfar(){
+            let ej4_cel = parseFloat(document.getElementById('ej4_cel').value)
+            var ej4_res_1 = ''
+            ej4_res_1= (ej4_cel * 1.8) + 32
+            document.getElementById("ej4_res_1").value=ej4_res_1
+        }
+    </script>
+    <br>
+    <label for="ej4_far">Ingrese una temperatura en Fahrenheit</label>
+    <input type="number" id="ej4_far">
+
+    <button onclick="func_farcel()">Convertir a Celcius</button>
+
+    <label for="ej4_res_2">Celcius</label>
+    <input type="number" id="ej4_res_2">
+
+    <script>
+        function func_farcel(){
+            let ej4_far = parseFloat(document.getElementById('ej4_far').value)
+            var ej4_res_2 =''
+            ej4_res_2=(ej4_far-32)*(5/9)
+            document.getElementById("ej4_res_2").value=ej4_res_2
+        }
+    </script>
+
+    <br>
+    
     <button onclick="window.location.href='index.html'"><h3>Ir a la página principal</h3></button>
 </body>
 </html>
