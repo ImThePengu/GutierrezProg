@@ -90,7 +90,7 @@
         }
     </script>
     <br>
-    <br>
+
     <h4>Ejercicio 4:</h4>
 
     <label for="ej4_cel">Ingrese una temperatura en Celcius</label>
@@ -129,6 +129,65 @@
 
     <br>
     
+    <h4>Ejercicio 5:</h4>
+
+    <textarea name="ej5_pal" onkeyup="func_ej5(this);"></textarea>
+    <p id="charNum"></p>
+
+    <script>
+        function func_ej5(obj){
+            document.getElementById("charNum").innerHTML ='Esta palabra o frase contiene '+ obj.value.length+' carácteres'
+            
+        }
+    </script>
+
+    <br>
+
+    <h4>Ejercicio 6:</h4>
+    
+    <br>
+    <label for="ej6_num"></label>
+    <input type="number" id="ej6_num">
+
+    <button onclick="func_ej6()">Par o Impar</button>
+
+    <label for="ej6_res"></label>
+    <input type="text" id="ej6_res">
+
+    <script>
+        function func_ej6(){
+            let ej6_num= parseFloat(document.getElementById('ej6_num').value)
+            if (ej6_num%2==0){ document.getElementById("ej6_res").value= 'Par'
+                } else { document.getElementById("ej6_res").value = 'Impar'
+                }
+        }
+    </script>
+
+    <br>
+
+    <h4>Ejercicio 7:</h4>
+
+    <label for="ej7_num1">Primer número</label>
+    <input type="number" id="ej7_num1">
+
+    <label for="ej7_num2">Segundo número</label>
+    <input type="number" id="ej7_num2">
+
+    <button onclick="func_ej7()"> Múltiplos de 3 comprendidos entre ambos</button>
+
+    <textarea name="ej7_mult"></textarea>
+    <script>
+        function func_ej7(){
+            let ej7_num1=parseFloat(document.getElementById('ej7_num1').value)
+            let ej7_num2=parseFloat(document.getElementById('ej7_num2').value)
+            for ( i = "ej7_num1"; i <= "ej7_num2"; i++) {             
+            if (i % 3 ==0)
+            document.getElementById("ej7_mult").value= i
+            
+            }
+        }
+    </script>
+    <br>
     <button onclick="window.location.href='index.html'"><h3>Ir a la página principal</h3></button>
 </body>
 </html>
