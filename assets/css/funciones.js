@@ -122,9 +122,6 @@
                  document.getElementById("ej10_entre").value = ej10_ac;
              }
         }
-        function func_ej21(a,b){
-            const ej21_suma= a + b; 
-                alert(ej21_suma);
-    }
+    
 
 
