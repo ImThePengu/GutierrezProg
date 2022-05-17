@@ -21,7 +21,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 220 },
+            gravity: { y: 180 },
             debug: true
         }
     },
@@ -112,8 +112,8 @@ function create ()
 
     stars2 = this.physics.add.group({
         key: 'star2',
-        repeat: 2,
-        setXY: { x: 35, y: 0, stepX: 70 }
+        repeat: 4,
+        setXY: { x: 105, y: 0, stepX: 140 }
     });
 
     stars.children.iterate(function (child) {
@@ -142,7 +142,7 @@ function create ()
 
     //  Checks to see if the player overlaps with any of the stars, if he does call the collectStar function
     this.physics.add.overlap(player, stars, collectStar, null, this);
-    this.physics.add.overlap(player, stars2, collectStar, null, this);
+    this.physics.add.overlap(player, stars2, collectStar2, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
 }
@@ -192,22 +192,23 @@ function collectStar (player, star)
     score += 10;
     scoreText.setText('Score: ' + score);
 
-    if (stars.countActive(true) === 0)
+    if (stars.countActive(true) === 0 && stars2.countActive(true) === 0)
     {
-        //  A new batch of stars to collect
-        stars.children.iterate(function (child) {
+        starpawn();
+    }
+}
 
-            child.enableBody(true, child.x, 0, true, true);
 
-        });
+function collectStar2 (player, star2)
+{
+    star2.disableBody(true, true);
 
-        var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-        var bomb = bombs.create(x, 16, 'bomb');
-        bomb.setBounce(1);
-        bomb.setCollideWorldBounds(true);
-        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-        bomb.allowGravity = false;
+    //  Add and update the score
+    score += 15;
+    scoreText.setText('Score: ' + score);
+    if (stars.countActive(true) === 0 && stars2.countActive(true) === 0)
+    {
+        starpawn();
     }
 }
 
@@ -222,7 +223,32 @@ function hitBomb (player, bomb)
     gameOver = true;
 }
 
+function starpawn()
+{
+    stars.children.iterate(function (child) {
+
+        child.enableBody(true, child.x, 0, true, true);
+
+    });
+        stars2.children.iterate(function (child) {
+
+        child.enableBody(true, child.x, 0, true, true);
+
+    });
+
+    var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
+
+    var bomb = bombs.create(x, 16, 'bomb');
+    bomb.setBounce(1);
+    bomb.setCollideWorldBounds(true);
+    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+    bomb.allowGravity = false;
+}
+
 </script>
 
+
 </body>
+
+<button onclick="window.location.href='index.html'"><h3>Ir a la página principal</h3></button>
 </html>
