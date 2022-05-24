@@ -1,15 +1,20 @@
 <!doctype html> 
 <html lang="en"> 
 <head> 
+    
     <meta charset="UTF-8" />
     <title>jueguito</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.js"></script>
+    <link rel="stylesheet" href="assets\css\a.css">
     <style type="text/css">
+        
         body {
             margin: 0;
         }
     </style>
+    
 </head>
+
 <body>
 
 <script type="text/javascript">
@@ -21,8 +26,8 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { y: 180 },
-            debug: true
+            gravity: { y: 250 },
+            debug: false
         }
     },
     scene: {
@@ -39,13 +44,16 @@ var bombs;
 var platforms;
 var cursors;
 var score = 0;
+var contgan = 1;
 var gameOver = false;
 var scoreText;
-
+var endtext;
+var againtext;
 var game = new Phaser.Game(config);
 
 function preload ()
 {
+    this.load.audio('space','assets/InstrumentalSpace.wav');
     this.load.image('sky', 'assets/sky.png');
     this.load.image('ground', 'assets/platform.png');
     this.load.image('star', 'assets/star.png');
@@ -58,6 +66,8 @@ function create ()
 {
     //  A simple background for our game
     this.add.image(400, 300, 'sky');
+    let audio = this.sound.add('space',{loop: true});
+    audio.play();
 
     //  The platforms group contains the ground and the 2 ledges we can jump on
     platforms = this.physics.add.staticGroup();
@@ -113,26 +123,26 @@ function create ()
     stars2 = this.physics.add.group({
         key: 'star2',
         repeat: 4,
-        setXY: { x: 105, y: 0, stepX: 140 }
+        setXY: { x: 105, y: 300, stepX: 140 }
     });
 
     stars.children.iterate(function (child) {
 
         //  Give each star a slightly different bounce
-        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+        child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.6));
 
     });
 
     stars2.children.iterate(function (child) {
 
-    child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8));
+    child.setBounceY(0.8);
 
     });
 
     bombs = this.physics.add.group();
 
     //  The score
-    scoreText = this.add.text(16, 16, 'score: 0', { fontSize: '32px', fill: '#000' });
+    scoreText = this.add.text(550, 555, 'Puntaje: 0', { fontSize: '32px', fill: '#FA7414', backgroundColor: '#F6CCAD', fontStyle: 'bold'});
 
     //  Collide the player and the stars with the platforms
     this.physics.add.collider(player, platforms);
@@ -150,15 +160,19 @@ function create ()
 function update ()
 {
     if (gameOver)
-    {
-        while (cursors.down.isUp)
+    {   
+        this.scene.stop;
+        this.sound.stopAll();
+        endtext = this.add.text(15, 200, 'FIN DEL JUEGO :(,', { fontSize: '80px', fill: '#ff0000', backgroundColor: '#F6CCAD', fontStyle: 'bold'});
+        againtext = this.add.text(10, 380, 'Para reiniciar presiona la tecla "↓"', { fontSize: '36px', fill: '#ff0000', backgroundColor: '#F6CCAD', fontStyle: 'italic'});
+        if (cursors.down.isDown)
         {
-            return;
-        }
-
+            this.scene.restart();
+            score = 0;
+            contgan = 1;
+            gameOver = false;
+         }
     }
-
-    
     if (cursors.left.isDown)
     {
         player.setVelocityX(-160);
@@ -188,9 +202,8 @@ function collectStar (player, star)
 {
     star.disableBody(true, true);
 
-    //  Add and update the score
     score += 10;
-    scoreText.setText('Score: ' + score);
+    scoreText.setText('Puntaje: ' + score);
 
     if (stars.countActive(true) === 0 && stars2.countActive(true) === 0)
     {
@@ -203,9 +216,8 @@ function collectStar2 (player, star2)
 {
     star2.disableBody(true, true);
 
-    //  Add and update the score
     score += 15;
-    scoreText.setText('Score: ' + score);
+    scoreText.setText('Puntaje: ' + score);
     if (stars.countActive(true) === 0 && stars2.countActive(true) === 0)
     {
         starpawn();
@@ -220,6 +232,7 @@ function hitBomb (player, bomb)
 
     player.anims.play('turn');
 
+
     gameOver = true;
 }
 
@@ -232,17 +245,19 @@ function starpawn()
     });
         stars2.children.iterate(function (child) {
 
-        child.enableBody(true, child.x, 0, true, true);
+        child.enableBody(true, child.x, 300, true, true);
 
     });
 
     var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-
-    var bomb = bombs.create(x, 16, 'bomb');
-    bomb.setBounce(1);
-    bomb.setCollideWorldBounds(true);
-    bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
-    bomb.allowGravity = false;
+    for (i=1; i<=contgan; i++){
+        var bomb = bombs.create(x, 16, 'bomb');
+        bomb.setBounce(1);
+        bomb.setCollideWorldBounds(true);
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20);
+        bomb.allowGravity = false;
+    }
+    contgan++;
 }
 
 </script>
@@ -250,5 +265,5 @@ function starpawn()
 
 </body>
 
-<button onclick="window.location.href='index.html'"><h3>Ir a la página principal</h3></button>
+
 </html>
